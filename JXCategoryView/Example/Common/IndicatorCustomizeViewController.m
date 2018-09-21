@@ -63,11 +63,15 @@
     switch (indexPath.row) {
         case 0:
         {
-            //固定宽度
+            // 需要修改指示器位置按钮
             testVC.isNeedIndicatorPositionChangeItem = YES;
+            // title的颜色是否渐变过渡
             titleCategoryView.titleColorGradientEnabled = YES;
+            // LineView指示器
             JXCategoryIndicatorLineView *lineView = [[JXCategoryIndicatorLineView alloc] init];
+            // 指示器固定宽度
             lineView.indicatorLineWidth = 20;
+            // 分割控制视图 添加指示器
             titleCategoryView.indicators = @[lineView];
         }
             break;

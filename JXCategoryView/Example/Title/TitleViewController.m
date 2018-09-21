@@ -23,18 +23,21 @@
 
     [super viewDidLoad];
 
-    // 设置分割控制视图标题
+    // 设置分割控制视图 标题
     self.myCategoryView.titles = self.titles;
 }
 
+// 获取分割控制视图
 - (JXCategoryTitleView *)myCategoryView {
     return (JXCategoryTitleView *)self.categoryView;
 }
 
+// 控制器数量
 - (NSUInteger)preferredListViewCount {
     return self.titles.count;
 }
 
+// 设置分割控制视图 种类
 - (Class)preferredCategoryViewClass {
     return [JXCategoryTitleView class];
 }
