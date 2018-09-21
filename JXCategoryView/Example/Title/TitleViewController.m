@@ -23,6 +23,7 @@
 
     [super viewDidLoad];
 
+    // 设置分割控制视图标题
     self.myCategoryView.titles = self.titles;
 }
 
