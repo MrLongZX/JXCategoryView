@@ -705,12 +705,12 @@
 		19870CBC2122BB6100C23CAA /* Title */ = {
 			isa = PBXGroup;
 			children = (
-				19870CBD2122BB6100C23CAA /* JXCategoryTitleCellModel.h */,
 				19870CBE2122BB6100C23CAA /* JXCategoryTitleCell.h */,
-				19870CBF2122BB6100C23CAA /* JXCategoryTitleView.h */,
-				19870CC02122BB6100C23CAA /* JXCategoryTitleCellModel.m */,
 				19870CC12122BB6100C23CAA /* JXCategoryTitleCell.m */,
+				19870CBF2122BB6100C23CAA /* JXCategoryTitleView.h */,
 				19870CC22122BB6100C23CAA /* JXCategoryTitleView.m */,
+				19870CBD2122BB6100C23CAA /* JXCategoryTitleCellModel.h */,
+				19870CC02122BB6100C23CAA /* JXCategoryTitleCellModel.m */,
 			);
 			path = Title;
 			sourceTree = "<group>";
@@ -745,14 +745,14 @@
 		19870CD22122BB6100C23CAA /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				19346D64212674220065FD8F /* JXCategoryViewDefines.h */,
+				19346D5521265AA80065FD8F /* JXCategoryIndicatorProtocol.h */,
 				19870CD32122BB6100C23CAA /* JXCategoryCollectionView.h */,
 				19870CD52122BB6100C23CAA /* JXCategoryCollectionView.m */,
 				19870CD42122BB6100C23CAA /* UIColor+JXAdd.h */,
 				19870CD62122BB6100C23CAA /* UIColor+JXAdd.m */,
-				19346D5521265AA80065FD8F /* JXCategoryIndicatorProtocol.h */,
 				19346D5F2126639B0065FD8F /* JXCategoryFactory.h */,
 				19346D602126639B0065FD8F /* JXCategoryFactory.m */,
-				19346D64212674220065FD8F /* JXCategoryViewDefines.h */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -761,10 +761,10 @@
 			isa = PBXGroup;
 			children = (
 				19870CE62122BB6100C23CAA /* JXCategoryBaseView.h */,
-				19870CE72122BB6100C23CAA /* JXCategoryBaseCell.h */,
-				19870CE82122BB6100C23CAA /* JXCategoryBaseCellModel.h */,
 				19870CE92122BB6100C23CAA /* JXCategoryBaseView.m */,
+				19870CE72122BB6100C23CAA /* JXCategoryBaseCell.h */,
 				19870CEA2122BB6100C23CAA /* JXCategoryBaseCell.m */,
+				19870CE82122BB6100C23CAA /* JXCategoryBaseCellModel.h */,
 				19870CEB2122BB6100C23CAA /* JXCategoryBaseCellModel.m */,
 			);
 			path = Base;

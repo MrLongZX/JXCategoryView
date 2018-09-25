@@ -12,8 +12,12 @@
 
 @protocol JXCategoryIndicatorProtocol <NSObject>
 
+/**
+ 刷新指示器位置
+ 
+ @param selectedCellFrame 当前处于选中状态的cell的位置
+ */
 - (void)jx_refreshState:(CGRect)selectedCellFrame;
-
 
 /**
  contentScrollView在进行手势滑动时，处理指示器跟随手势变化UI逻辑；

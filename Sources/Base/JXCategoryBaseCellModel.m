@@ -10,6 +10,7 @@
 
 @implementation JXCategoryBaseCellModel
 
+#pragma mark - 获取cell宽度
 - (CGFloat)cellWidth {
     if (_cellWidthZoomEnabled) {
         return _cellWidth * _cellWidthZoomScale;

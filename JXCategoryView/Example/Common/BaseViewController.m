@@ -103,11 +103,6 @@
     return [JXCategoryBaseView class];
 }
 
-#pragma mark - 选择列表视图 数量
-- (NSUInteger)preferredListViewCount {
-    return 0;
-}
-
 #pragma mark - 选择分割控制视图 高度
 - (CGFloat)preferredCategoryViewHeight {
     return 50;
@@ -116,6 +111,11 @@
 #pragma mark - 选择列表视图 类
 - (Class)preferredListViewControllerClass {
     return [ListViewController class];
+}
+
+#pragma mark - 选择列表视图 数量
+- (NSUInteger)preferredListViewCount {
+    return 0;
 }
 
 #pragma mark - 在某个位置 配置列表视图

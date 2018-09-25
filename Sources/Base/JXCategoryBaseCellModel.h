@@ -11,16 +11,17 @@
 
 @interface JXCategoryBaseCellModel : NSObject
 
+/// 位置
 @property (nonatomic, assign) NSUInteger index;
-
+/// 是否选中
 @property (nonatomic, assign) BOOL selected;
-
+/// cell宽度
 @property (nonatomic, assign) CGFloat cellWidth;
-
+/// cell间距
 @property (nonatomic, assign) CGFloat cellSpacing;
-
+/// 是否可缩放
 @property (nonatomic, assign) BOOL cellWidthZoomEnabled;
-
+/// 缩放比例
 @property (nonatomic, assign) CGFloat cellWidthZoomScale;
 
 @end

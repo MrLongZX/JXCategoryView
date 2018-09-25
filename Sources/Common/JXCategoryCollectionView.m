@@ -14,6 +14,7 @@
 {
     [super layoutSubviews];
 
+    // 对指示器进行布局
     for (UIView<JXCategoryIndicatorProtocol> *view in self.indicators) {
         [self sendSubviewToBack:view];
     }

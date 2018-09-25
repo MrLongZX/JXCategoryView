@@ -22,14 +22,16 @@
     return self;
 }
 
+#pragma mark - 初始化子视图
 - (void)initializeViews
 {
 
 }
 
-- (void)reloadData:(JXCategoryBaseCellModel *)cellModel {
-    self.cellModel = cellModel;
-    
+#pragma mark - 刷新数据
+- (void)reloadData:(JXCategoryBaseCellModel *)cellModel
+{
+    self.cellModel = cellModel;    
 }
 
 @end

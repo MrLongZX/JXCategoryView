@@ -24,12 +24,12 @@
 
 /// 选择分割控制视图 种类
 - (Class)preferredCategoryViewClass;
-/// 选择列表视图 数量
-- (NSUInteger)preferredListViewCount;
 /// 选择分割控制视图 高度
 - (CGFloat)preferredCategoryViewHeight;
 /// 选择列表视图 类
 - (Class)preferredListViewControllerClass;
+/// 选择列表视图 数量
+- (NSUInteger)preferredListViewCount;
 /// 在某个位置 配置列表视图
 - (void)configListViewController:(UIViewController *)controller index:(NSUInteger)index;
 

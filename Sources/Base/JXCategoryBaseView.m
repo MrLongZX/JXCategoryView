@@ -20,6 +20,7 @@
 
 - (void)dealloc
 {
+    // 移除监听
     if (self.contentScrollView) {
         [self.contentScrollView removeObserver:self forKeyPath:@"contentOffset"];
     }
@@ -45,6 +46,7 @@
     return self;
 }
 
+#pragma mark - 初始化数据
 - (void)initializeData
 {
     _dataSource = [NSMutableArray array];
@@ -58,6 +60,7 @@
     _cellWidthZoomScrollGradientEnabled = YES;
 }
 
+#pragma mark - 创建子视图 collectionview
 - (void)initializeViews
 {
     self.collectionView = ({
@@ -76,6 +79,7 @@
     [self addSubview:self.collectionView];
 }
 
+#pragma mark - 默认选择的位置
 - (void)setDefaultSelectedIndex:(NSInteger)defaultSelectedIndex
 {
     _defaultSelectedIndex = defaultSelectedIndex;
@@ -83,6 +87,7 @@
     self.selectedIndex = defaultSelectedIndex;
 }
 
+#pragma mark - 设置需要关联的scrollview 添加contentOffset监听
 - (void)setContentScrollView:(UIScrollView *)contentScrollView
 {
     if (_contentScrollView != nil) {
@@ -93,14 +98,18 @@
     [contentScrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
 }
 
-- (void)reloadData {
+#pragma mark - 刷新全部数据
+- (void)reloadData
+{
     [self refreshDataSource];
     [self refreshState];
     [self.collectionView.collectionViewLayout invalidateLayout];
     [self.collectionView reloadData];
 }
 
-- (void)reloadCellAtIndex:(NSInteger)index {
+#pragma mark - 刷新某个位置的数据
+- (void)reloadCellAtIndex:(NSInteger)index
+{
     if (index >= self.dataSource.count) {
         return;
     }
@@ -110,7 +119,8 @@
     [cell reloadData:cellModel];
 }
 
-- (void)selectItemAtIndex:(NSInteger)index {
+- (void)selectItemAtIndex:(NSInteger)index
+{
     [self selectCellAtIndex:index];
 }
 

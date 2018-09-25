@@ -56,17 +56,17 @@
 
 @interface JXCategoryBaseView : UIView
 
-@property (nonatomic, strong) JXCategoryCollectionView *collectionView;
+@property (nonatomic, strong) JXCategoryCollectionView *collectionView;   //collectionView
 
-@property (nonatomic, strong) NSArray <JXCategoryBaseCellModel *>*dataSource;
+@property (nonatomic, strong) NSArray <JXCategoryBaseCellModel *>*dataSource;   //collectionView数据
 
-@property (nonatomic, weak) id<JXCategoryViewDelegate>delegate;
+@property (nonatomic, weak) id<JXCategoryViewDelegate>delegate;    //代理
 
 @property (nonatomic, strong) UIScrollView *contentScrollView;    //需要关联的contentScrollView
 
 @property (nonatomic, assign) NSInteger defaultSelectedIndex;   //修改初始化的时候默认选择的index
 
-@property (nonatomic, assign, readonly) NSInteger selectedIndex;
+@property (nonatomic, assign, readonly) NSInteger selectedIndex;    //目前选中的index
 
 @property (nonatomic, assign) CGFloat cellWidth;    //默认JXCategoryViewAutomaticDimension
 

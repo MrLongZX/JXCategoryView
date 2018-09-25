@@ -11,6 +11,7 @@
 
 @interface JXCategoryCollectionView : UICollectionView
 
+/// 指示器数据
 @property (nonatomic, strong) NSArray <UIView<JXCategoryIndicatorProtocol> *> *indicators;
 
 @end
