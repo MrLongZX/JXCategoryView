@@ -97,6 +97,7 @@
     }
 }
 
+#pragma mark - refreshState时调用，重置cellModel的状态
 - (void)refreshCellModel:(JXCategoryBaseCellModel *)cellModel index:(NSInteger)index {
     [super refreshCellModel:cellModel index:index];
 

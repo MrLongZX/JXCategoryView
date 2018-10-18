@@ -107,7 +107,7 @@
     [self.collectionView reloadData];
 }
 
-#pragma mark - 刷新某个位置的数据
+#pragma mark - 刷新指定的index的cell
 - (void)reloadCellAtIndex:(NSInteger)index
 {
     if (index >= self.dataSource.count) {
@@ -119,11 +119,11 @@
     [cell reloadData:cellModel];
 }
 
+#pragma mark - 代码调用选中了目标index的item
 - (void)selectItemAtIndex:(NSInteger)index
 {
     [self selectCellAtIndex:index];
 }
-
 
 - (void)layoutSubviews
 {
@@ -134,16 +134,21 @@
 
 #pragma mark - Subclass Override
 
-- (void)refreshDataSource {
+- (void)refreshDataSource
+{
 
 }
 
 - (void)refreshState {
+    // 选中位置
     if (self.selectedIndex >= self.dataSource.count) {
         self.selectedIndex = 0;
     }
 
+    // 设置dataSource中cellModel的数据 对所有位置数据进行刷新
+    // 所有控件宽度
     __block CGFloat totalItemWidth = self.cellSpacing;
+    // 所有cell宽度
     CGFloat totalCellWidth = 0;
     for (int i = 0; i < self.dataSource.count; i++) {
         JXCategoryBaseCellModel *cellModel = self.dataSource[i];
@@ -157,14 +162,16 @@
         if (i == self.selectedIndex) {
             cellModel.selected = YES;
             cellModel.cellWidthZoomScale = self.cellWidthZoomScale;
-        }else {
+        } else {
             cellModel.selected = NO;
         }
+        // 重置cellModel的状态
         [self refreshCellModel:cellModel index:i];
     }
 
+    // 根据不同情况，处理cell的间隔
     if (self.averageCellSpacingEnabled && totalItemWidth < self.bounds.size.width) {
-        //如果总的内容宽度都没有超过视图度，就将cellWidth等分
+        // 如果总的内容宽度都没有超过视图度，就将cellWidth等分
         CGFloat cellSpacing = 0;
         if (self.dataSource.count > 0) {
             cellSpacing = (self.bounds.size.width - totalCellWidth)/(self.dataSource.count - 1 + 2);
@@ -177,6 +184,7 @@
         self.innerCellSpacing = self.cellSpacing;
     }
 
+    // 设置collectionView 和 contentScrollView 的选中内容偏移
     __block CGFloat frameXOfSelectedCell = self.innerCellSpacing;
     __block CGFloat selectedCellWidth = 0;
     totalItemWidth = self.innerCellSpacing;
@@ -197,6 +205,7 @@
     [self.contentScrollView setContentOffset:CGPointMake(self.selectedIndex*self.contentScrollView.bounds.size.width, 0) animated:NO];
 }
 
+#pragma mark - 代码调用选中目标index的item
 - (BOOL)selectCellAtIndex:(NSInteger)targetIndex {
     if (targetIndex >= self.dataSource.count) {
         return NO;
@@ -209,27 +218,34 @@
         return NO;
     }
 
+    // 处理新旧选中model数据的修改
     JXCategoryBaseCellModel *lastCellModel = self.dataSource[self.selectedIndex];
     JXCategoryBaseCellModel *selectedCellModel = self.dataSource[targetIndex];
     [self refreshSelectedCellModel:selectedCellModel unselectedCellModel:lastCellModel];
 
+    // 重新设置之前选中cell的数据 修改样式
     JXCategoryBaseCell *lastCell = (JXCategoryBaseCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.selectedIndex inSection:0]];
     [lastCell reloadData:lastCellModel];
 
+    // 设置目前选中cell的数据 修改样式
     JXCategoryBaseCell *selectedCell = (JXCategoryBaseCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0]];
     [selectedCell reloadData:selectedCellModel];
 
+    // cell宽度是否缩放
     if (self.cellWidthZoomEnabled) {
+        // 更新布局
         [self.collectionView.collectionViewLayout invalidateLayout];
 
-        //延时为了解决cellwidth变化，点击最后几个cell，scrollToItem会出现位置偏移bug
+        // 延时为了解决cellwidth变化，点击最后几个cell，scrollToItem会出现位置偏移bug
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
         });
     }else {
+        // collectionview对选中位置滚动到中间
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     }
 
+    // contentScrollView对选中位置滚动到屏幕中间显示
     [self.contentScrollView setContentOffset:CGPointMake(targetIndex*self.contentScrollView.bounds.size.width, 0) animated:YES];
 
     self.selectedIndex = targetIndex;
@@ -240,7 +256,7 @@
     return YES;
 }
 
-
+#pragma mark - 用户点击了某个item，刷新选中与取消选中的cellModel
 - (void)refreshSelectedCellModel:(JXCategoryBaseCellModel *)selectedCellModel unselectedCellModel:(JXCategoryBaseCellModel *)unselectedCellModel {
     selectedCellModel.selected = YES;
     selectedCellModel.cellWidthZoomScale = self.cellWidthZoomScale;
@@ -248,6 +264,7 @@
     unselectedCellModel.cellWidthZoomScale = 1.0;
 }
 
+#pragma mark - 关联的contentScrollView的contentOffset发生了改变
 - (void)contentOffsetOfContentScrollViewDidChanged:(CGPoint)contentOffset {
     CGFloat ratio = contentOffset.x/self.contentScrollView.bounds.size.width;
     if (ratio > self.dataSource.count - 1 || ratio < 0) {
@@ -284,14 +301,17 @@
     }
 }
 
+#pragma mark - reloadData时，返回每个cell的宽度
 - (CGFloat)preferredCellWidthAtIndex:(NSInteger)index {
     return 0;
 }
 
+#pragma mark - 返回自定义cell的class
 - (Class)preferredCellClass {
     return JXCategoryBaseCell.class;
 }
 
+#pragma mark - refreshState时调用，重置cellModel的状态
 - (void)refreshCellModel:(JXCategoryBaseCellModel *)cellModel index:(NSInteger)index {
 
 }
