@@ -10,6 +10,7 @@
 #import "JXCategoryTitleCellModel.h"
 
 @interface JXCategoryTitleCell ()
+// 遮罩layer
 @property (nonatomic, strong) CALayer *maskLayer;
 
 @end
@@ -20,6 +21,7 @@
 {
     [super initializeViews];
     
+    // 创建控件
     _titleLabel = [[UILabel alloc] init];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:self.titleLabel];
@@ -34,19 +36,24 @@
     self.maskTitleLabel.layer.mask = self.maskLayer;
 }
 
-- (void)layoutSubviews {
+- (void)layoutSubviews
+{
     [super layoutSubviews];
 
+    // 布局
     self.titleLabel.center = self.contentView.center;
     self.maskTitleLabel.center = self.contentView.center;
 }
 
-- (void)reloadData:(JXCategoryBaseCellModel *)cellModel {
+- (void)reloadData:(JXCategoryBaseCellModel *)cellModel
+{
     [super reloadData:cellModel];
 
+    // 标题
     JXCategoryTitleCellModel *myCellModel = (JXCategoryTitleCellModel *)cellModel;
     self.titleLabel.font = myCellModel.titleFont;
 
+    // 标题labele能否缩放
     if (myCellModel.titleLabelZoomEnabled) {
         self.titleLabel.transform = CGAffineTransformMakeScale(myCellModel.titleLabelZoomScale, myCellModel.titleLabelZoomScale);
         self.maskTitleLabel.transform = CGAffineTransformMakeScale(myCellModel.titleLabelZoomScale, myCellModel.titleLabelZoomScale);
@@ -55,6 +62,7 @@
         self.maskTitleLabel.transform = CGAffineTransformIdentity;
     }
 
+    // 标题Label是否遮罩过滤
     self.maskTitleLabel.hidden = !myCellModel.titleLabelMaskEnabled;
     if (myCellModel.titleLabelMaskEnabled) {
         self.titleLabel.textColor = myCellModel.titleColor;
@@ -71,19 +79,19 @@
         [CATransaction setDisableActions:YES];
         self.maskLayer.frame = frame;
         [CATransaction commit];
-    }else {
+    } else {
         if (myCellModel.selected) {
             self.titleLabel.textColor = myCellModel.titleSelectedColor;
-        }else {
+        } else {
             self.titleLabel.textColor = myCellModel.titleColor;
         }
     }
 
+    // 重新布局
     self.titleLabel.text = myCellModel.title;
     [self.titleLabel sizeToFit];
     [self setNeedsLayout];
     [self layoutIfNeeded];
 }
-
 
 @end

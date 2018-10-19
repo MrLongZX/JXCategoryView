@@ -12,6 +12,12 @@
 #import "JXCategoryCollectionView.h"
 #import "JXCategoryViewDefines.h"
 
+// 主要内容：
+// 数据、UI的初始化
+// collectionView contentScrollView通过“点击”与“滚动”位置的移动
+// 基础数据“选中” “cell间隔”等的设置
+// 代理的执行
+
 @class JXCategoryBaseView;
 
 @protocol JXCategoryViewDelegate <NSObject>

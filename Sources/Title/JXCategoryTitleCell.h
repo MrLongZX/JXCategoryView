@@ -10,8 +10,9 @@
 
 @interface JXCategoryTitleCell : JXCategoryIndicatorCell
 
+/// 标题label
 @property (nonatomic, strong) UILabel *titleLabel;
-
+/// 标题遮罩层label
 @property (nonatomic, strong) UILabel *maskTitleLabel;
 
 @end

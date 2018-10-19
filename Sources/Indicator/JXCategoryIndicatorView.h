@@ -11,11 +11,12 @@
 #import "JXCategoryIndicatorCellModel.h"
 #import "JXCategoryIndicatorProtocol.h"
 
+// 主要内容：控制指示器的位置 cell的背景色 cell间的分割线
 @interface JXCategoryIndicatorView : JXCategoryBaseView
 
 @property (nonatomic, strong) NSArray <UIView<JXCategoryIndicatorProtocol> *> *indicators;
 
-//----------------------ellBackgroundColor-----------------------//
+//----------------------cellBackgroundColor-----------------------//
 @property (nonatomic, assign) BOOL cellBackgroundColorGradientEnabled;      //默认：NO
 
 @property (nonatomic, strong) UIColor *cellBackgroundUnselectedColor;       //默认：[UIColor clearColor]

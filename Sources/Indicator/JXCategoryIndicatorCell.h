@@ -8,6 +8,7 @@
 
 #import "JXCategoryBaseCell.h"
 
+/// 指示器cell
 @interface JXCategoryIndicatorCell : JXCategoryBaseCell
 
 @end
