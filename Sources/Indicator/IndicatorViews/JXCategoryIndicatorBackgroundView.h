@@ -8,6 +8,9 @@
 
 #import "JXCategoryIndicatorComponentView.h"
 
+// 主要内容：
+// 设置 指示器高度、宽度、宽度增量、圆角、颜色等属性
+// 在三个指示器协议方法中，实现指示器位置的移动
 @interface JXCategoryIndicatorBackgroundView : JXCategoryIndicatorComponentView
 
 @property (nonatomic, assign) CGFloat backgroundViewWidth;     //默认JXCategoryViewAutomaticDimension（与cellWidth相等）
@@ -18,6 +21,6 @@
 
 @property (nonatomic, assign) CGFloat backgroundViewCornerRadius;   //默认JXCategoryViewAutomaticDimension(即backgroundViewHeight/2)
 
-@property (nonatomic, strong) UIColor *backgroundViewColor;   //默认为[UIColor redColor]
+@property (nonatomic, strong) UIColor *backgroundViewColor;   //默认为[UIColor lightGrayColor]
 
 @end

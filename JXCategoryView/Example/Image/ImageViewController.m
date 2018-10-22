@@ -23,8 +23,11 @@
 
     NSArray *selectedImageNames = @[@"crab_selected", @"lobster_selected", @"apple_selected", @"carrot_selected", @"grape_selected", @"watermelon_selected"];
 
+    // 未选中状态图片
     self.myCategoryView.imageNames = self.imageNames;
+    // 选中状态图片
     self.myCategoryView.selectedImageNames = selectedImageNames;
+    // 图片缩放
     self.myCategoryView.imageZoomEnabled = YES;
 
     JXCategoryIndicatorLineView *lineView = [[JXCategoryIndicatorLineView alloc] init];

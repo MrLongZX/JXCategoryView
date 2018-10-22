@@ -12,18 +12,19 @@
 
 @property (nonatomic, copy) void(^loadImageCallback)(UIImageView *imageView);
 
-@property (nonatomic, copy) NSString *imageName;    //加载bundle内的图片
-
-@property (nonatomic, strong) NSURL *imageURL;      //图片URL
-
+/// 加载bundle内的图片
+@property (nonatomic, copy) NSString *imageName;
+/// 图片URL
+@property (nonatomic, strong) NSURL *imageURL;
+/// 加载bundle内的选中图片
 @property (nonatomic, copy) NSString *selectedImageName;
-
+/// 选中图片URL
 @property (nonatomic, strong) NSURL *selectedImageURL;
-
+/// 图片大小
 @property (nonatomic, assign) CGSize imageSize;
-
+/// 图片是否缩放
 @property (nonatomic, assign) BOOL imageZoomEnabled;    
-
+/// 图片缩放比例
 @property (nonatomic, assign) CGFloat imageZoomScale;
 
 @end

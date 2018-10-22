@@ -27,11 +27,14 @@
 }
 
 #pragma mark - JXCategoryComponentProtocol
-
-- (void)jx_refreshState:(CGRect)selectedCellFrame {
+#pragma mark -  刷新指示器位置
+- (void)jx_refreshState:(CGRect)selectedCellFrame
+{
+    // 属性
     self.backgroundColor = self.indicatorLineViewColor;
     self.layer.cornerRadius = [self getIndicatorLineViewCornerRadius];
 
+    // frame
     CGFloat selectedLineWidth = [self getIndicatorLineViewWidth:selectedCellFrame];
     CGFloat x = selectedCellFrame.origin.x + (selectedCellFrame.size.width - selectedLineWidth)/2;
     CGFloat y = self.superview.bounds.size.height - self.indicatorLineViewHeight - self.verticalMargin;
@@ -41,27 +44,30 @@
     self.frame = CGRectMake(x, y, selectedLineWidth, self.indicatorLineViewHeight);
 }
 
-- (void)jx_contentScrollViewDidScrollWithLeftCellFrame:(CGRect)leftCellFrame rightCellFrame:(CGRect)rightCellFrame selectedPosition:(JXCategoryCellClickedPosition)selectedPosition percent:(CGFloat)percent {
+#pragma mark - contentScrollView在进行手势滑动时，处理指示器跟随手势变化UI逻辑
+- (void)jx_contentScrollViewDidScrollWithLeftCellFrame:(CGRect)leftCellFrame rightCellFrame:(CGRect)rightCellFrame selectedPosition:(JXCategoryCellClickedPosition)selectedPosition percent:(CGFloat)percent
+{
 
     CGFloat targetX = leftCellFrame.origin.x;
     CGFloat targetWidth = [self getIndicatorLineViewWidth:leftCellFrame];
 
     if (percent == 0) {
         targetX = leftCellFrame.origin.x + (leftCellFrame.size.width - targetWidth)/2.0;
-    }else {
+    } else {
         CGFloat leftWidth = targetWidth;
         CGFloat rightWidth = [self getIndicatorLineViewWidth:rightCellFrame];
 
         CGFloat leftX = leftCellFrame.origin.x + (leftCellFrame.size.width - leftWidth)/2;
         CGFloat rightX = rightCellFrame.origin.x + (rightCellFrame.size.width - rightWidth)/2;
 
+        // 处理 坐标x 与 指示器宽度
         if (self.lineStyle == JXCategoryIndicatorLineStyle_Normal) {
             targetX = [JXCategoryFactory interpolationFrom:leftX to:rightX percent:percent];
 
             if (self.indicatorLineWidth == JXCategoryViewAutomaticDimension) {
                 targetWidth = [JXCategoryFactory interpolationFrom:leftCellFrame.size.width to:rightCellFrame.size.width percent:percent];
             }
-        }else if (self.lineStyle == JXCategoryIndicatorLineStyle_JD) {
+        } else if (self.lineStyle == JXCategoryIndicatorLineStyle_JD) {
             CGFloat maxWidth = rightX - leftX + rightWidth;
             //前50%，只增加width；后50%，移动x并减小width
             if (percent <= 0.5) {
@@ -71,7 +77,7 @@
                 targetX = [JXCategoryFactory interpolationFrom:leftX to:rightX percent:(percent - 0.5)*2];
                 targetWidth = [JXCategoryFactory interpolationFrom:maxWidth to:rightWidth percent:(percent - 0.5)*2];
             }
-        }else if (self.lineStyle == JXCategoryIndicatorLineStyle_IQIYI) {
+        } else if (self.lineStyle == JXCategoryIndicatorLineStyle_IQIYI) {
             //前50%，增加width，并少量移动x；后50%，少量移动x并减小width
             CGFloat offsetX = self.lineScrollOffsetX;//x的少量偏移量
             CGFloat maxWidth = rightX - leftX + rightWidth - offsetX*2;
@@ -85,7 +91,7 @@
         }
     }
 
-    //允许变动frame的情况：1、允许滚动；2、不允许滚动，但是已经通过手势滚动切换一页内容了；
+    // 允许变动frame的情况：1、允许滚动；2、不允许滚动，但是已经通过手势滚动切换一页内容了；
     if (self.scrollEnabled == YES || (self.scrollEnabled == NO && percent == 0)) {
         CGRect frame = self.frame;
         frame.origin.x = targetX;
@@ -94,25 +100,29 @@
     }
 }
 
-- (void)jx_selectedCell:(CGRect)cellFrame clickedRelativePosition:(JXCategoryCellClickedPosition)clickedRelativePosition {
+#pragma mark - 点击选中了某一个cell，处理指示器跟随手势变化UI逻辑
+- (void)jx_selectedCell:(CGRect)cellFrame clickedRelativePosition:(JXCategoryCellClickedPosition)clickedRelativePosition
+{
+    // 修改frame
     CGFloat targetWidth = [self getIndicatorLineViewWidth:cellFrame];
     CGRect toFrame = self.frame;
     toFrame.origin.x = cellFrame.origin.x + (cellFrame.size.width - targetWidth)/2.0;
     toFrame.size.width = targetWidth;
 
+    // frame改变时 是否允许滚动
     if (self.scrollEnabled) {
         [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             self.frame = toFrame;
         } completion:^(BOOL finished) {
 
         }];
-    }else {
+    } else {
         self.frame = toFrame;
     }
 }
 
-# pragma mark - Private
-
+#pragma mark - Private
+#pragma mark - 获取横线指示器圆角
 - (CGFloat)getIndicatorLineViewCornerRadius
 {
     if (self.indicatorLineViewCornerRadius == JXCategoryViewAutomaticDimension) {
@@ -121,6 +131,7 @@
     return self.indicatorLineViewCornerRadius;
 }
 
+#pragma mark - 获取横线指示器宽度
 - (CGFloat)getIndicatorLineViewWidth:(CGRect)cellFrame
 {
     if (self.indicatorLineWidth == JXCategoryViewAutomaticDimension) {

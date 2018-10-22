@@ -11,25 +11,32 @@
 
 @implementation JXCategoryImageCell
 
-- (void)initializeViews {
+- (void)initializeViews
+{
     [super initializeViews];
 
+    // 创建imageview
     _imageView = [[UIImageView alloc] init];
     _imageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.contentView addSubview:_imageView];
 }
 
-- (void)layoutSubviews {
+- (void)layoutSubviews
+{
     [super layoutSubviews];
 
+    // 设置图片大小位置
     JXCategoryImageCellModel *myCellModel = (JXCategoryImageCellModel *)self.cellModel;
     self.imageView.bounds = CGRectMake(0, 0, myCellModel.imageSize.width, myCellModel.imageSize.height);
     self.imageView.center = self.contentView.center;
 }
 
-- (void)reloadData:(JXCategoryBaseCellModel *)cellModel {
+#pragma mark - 刷新数据
+- (void)reloadData:(JXCategoryBaseCellModel *)cellModel
+{
     [super reloadData:cellModel];
 
+    // 处理正常状态图片与选中状态图片
     JXCategoryImageCellModel *myCellModel = (JXCategoryImageCellModel *)cellModel;
     if (myCellModel.imageName != nil) {
         self.imageView.image = [UIImage imageNamed:myCellModel.imageName];
@@ -48,6 +55,7 @@
         }
     }
 
+    // 图片缩放
     if (myCellModel.imageZoomEnabled) {
         self.imageView.transform = CGAffineTransformMakeScale(myCellModel.imageZoomScale, myCellModel.imageZoomScale);
     }else {

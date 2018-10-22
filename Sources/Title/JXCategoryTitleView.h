@@ -10,6 +10,10 @@
 #import "JXCategoryTitleCell.h"
 #import "JXCategoryTitleCellModel.h"
 
+// 主要内容：
+// 初始化title类型的标题颜色、字体大小、label缩放等数据
+// 创建数据模型 初始化标题模型数据
+// 用户点击item更新数据，滑动contentScrollView处理标题label相关内容
 @interface JXCategoryTitleView : JXCategoryIndicatorView
 
 @property (nonatomic, strong) NSArray <NSString *>*titles;

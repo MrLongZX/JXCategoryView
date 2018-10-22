@@ -14,6 +14,9 @@ typedef NS_ENUM(NSUInteger, JXCategoryIndicatorLineStyle) {
     JXCategoryIndicatorLineStyle_IQIYI,
 };
 
+// 主要内容：
+// 设置 指示器高度、宽度、圆角、颜色、滚动偏移等属性
+// 在三个指示器协议方法中，实现指示器位置的移动
 @interface JXCategoryIndicatorLineView : JXCategoryIndicatorComponentView
 
 @property (nonatomic, assign) JXCategoryIndicatorLineStyle lineStyle;

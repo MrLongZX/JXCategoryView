@@ -25,8 +25,9 @@
 }
 
 #pragma mark - JXCategoryComponentProtocol
-
-- (void)jx_refreshState:(CGRect)selectedCellFrame {
+#pragma mark -  刷新指示器位置
+- (void)jx_refreshState:(CGRect)selectedCellFrame
+{
     self.layer.cornerRadius = [self getBackgroundViewCornerRadius:selectedCellFrame];
     self.backgroundColor = self.backgroundViewColor;
 
@@ -37,14 +38,15 @@
     self.frame = CGRectMake(x, y, width, height);
 }
 
-- (void)jx_contentScrollViewDidScrollWithLeftCellFrame:(CGRect)leftCellFrame rightCellFrame:(CGRect)rightCellFrame selectedPosition:(JXCategoryCellClickedPosition)selectedPosition percent:(CGFloat)percent {
-
+#pragma mark - contentScrollView在进行手势滑动时，处理指示器跟随手势变化UI逻辑
+- (void)jx_contentScrollViewDidScrollWithLeftCellFrame:(CGRect)leftCellFrame rightCellFrame:(CGRect)rightCellFrame selectedPosition:(JXCategoryCellClickedPosition)selectedPosition percent:(CGFloat)percent
+{
     CGFloat targetX = leftCellFrame.origin.x;
     CGFloat targetWidth = [self getBackgroundViewWidth:leftCellFrame];
 
     if (percent == 0) {
         targetX = leftCellFrame.origin.x + (leftCellFrame.size.width - targetWidth)/2.0;
-    }else {
+    } else {
         CGFloat leftWidth = targetWidth;
         CGFloat rightWidth = [self getBackgroundViewWidth:rightCellFrame];
 
@@ -58,7 +60,7 @@
         }
     }
 
-    //允许变动frame的情况：1、允许滚动；2、不允许滚动，但是已经通过手势滚动切换一页内容了；
+    // 允许变动frame的情况：1、允许滚动；2、不允许滚动，但是已经通过手势滚动切换一页内容了；
     if (self.scrollEnabled == YES || (self.scrollEnabled == NO && percent == 0)) {
         CGFloat height = [self getBackgroundViewHeight:leftCellFrame];
         CGFloat y = (leftCellFrame.size.height - height)/2;
@@ -66,7 +68,9 @@
     }
 }
 
-- (void)jx_selectedCell:(CGRect)cellFrame clickedRelativePosition:(JXCategoryCellClickedPosition)clickedRelativePosition {
+#pragma mark - 点击选中了某一个cell，处理指示器跟随手势变化UI逻辑
+- (void)jx_selectedCell:(CGRect)cellFrame clickedRelativePosition:(JXCategoryCellClickedPosition)clickedRelativePosition
+{
     CGFloat width = [self getBackgroundViewWidth:cellFrame];
     CGFloat height = [self getBackgroundViewHeight:cellFrame];
     CGFloat x = cellFrame.origin.x + (cellFrame.size.width - width)/2;
@@ -84,7 +88,7 @@
 }
 
 #pragma mark - Private
-
+#pragma mark - 获取背景view宽度
 - (CGFloat)getBackgroundViewWidth:(CGRect)cellFrame
 {
     if (self.backgroundViewWidth == JXCategoryViewAutomaticDimension) {
@@ -93,6 +97,7 @@
     return self.backgroundViewWidth + self.backgroundViewWidthIncrement;
 }
 
+#pragma mark - 获取背景view高度
 - (CGFloat)getBackgroundViewHeight:(CGRect)cellFrame
 {
     if (self.backgroundViewHeight == JXCategoryViewAutomaticDimension) {
@@ -101,7 +106,9 @@
     return self.backgroundViewHeight;
 }
 
-- (CGFloat)getBackgroundViewCornerRadius:(CGRect)cellFrame {
+#pragma mark - 获取背景view圆角
+- (CGFloat)getBackgroundViewCornerRadius:(CGRect)cellFrame
+{
     if (self.backgroundViewCornerRadius == JXCategoryViewAutomaticDimension) {
         return [self getBackgroundViewHeight:cellFrame]/2;
     }

@@ -71,7 +71,7 @@
             JXCategoryIndicatorLineView *lineView = [[JXCategoryIndicatorLineView alloc] init];
             // 指示器固定宽度
             lineView.indicatorLineWidth = 20;
-            // 分割控制视图 添加指示器
+            // 设置指示器
             titleCategoryView.indicators = @[lineView];
         }
             break;
@@ -79,9 +79,13 @@
         {
             //与cell等宽
             testVC.isNeedIndicatorPositionChangeItem = YES;
+            // title的颜色是否渐变过渡
             titleCategoryView.titleColorGradientEnabled = YES;
+            // LineView指示器
             JXCategoryIndicatorLineView *lineView = [[JXCategoryIndicatorLineView alloc] init];
+            // 指示器与cell等宽
             lineView.indicatorLineWidth = JXCategoryViewAutomaticDimension;
+            // 设置指示器
             titleCategoryView.indicators = @[lineView];
         }
             break;
@@ -92,6 +96,7 @@
             titleCategoryView.titleColorGradientEnabled = YES;
             JXCategoryIndicatorLineView *lineView = [[JXCategoryIndicatorLineView alloc] init];
             lineView.indicatorLineWidth = 20;
+            // 设置横线指示器类型
             lineView.lineStyle = JXCategoryIndicatorLineStyle_JD;
             titleCategoryView.indicators = @[lineView];
         }
@@ -103,6 +108,7 @@
             titleCategoryView.titleColorGradientEnabled = YES;
             JXCategoryIndicatorLineView *lineView = [[JXCategoryIndicatorLineView alloc] init];
             lineView.indicatorLineWidth = 20;
+            // 设置横线指示器类型
             lineView.lineStyle = JXCategoryIndicatorLineStyle_IQIYI;
             titleCategoryView.indicators = @[lineView];
         }
@@ -129,8 +135,11 @@
         {
             //椭圆形
             titleCategoryView.titleColorGradientEnabled = YES;
+            // BackgroundView指示器
             JXCategoryIndicatorBackgroundView *backgroundView = [[JXCategoryIndicatorBackgroundView alloc] init];
+            // 指示器高度
             backgroundView.backgroundViewHeight = 20;
+            // 指示器圆角
             backgroundView.backgroundViewCornerRadius = JXCategoryViewAutomaticDimension;
             titleCategoryView.indicators = @[backgroundView];
         }

@@ -123,10 +123,12 @@
             break;
         case 6:
         {
-            //图片
+            // 图片
             ImageViewController *testVC = [[ImageViewController alloc] init];
             testVC.title = title;
+            // 图片样式
             JXCategoryImageView *imageCategoryView = (JXCategoryImageView *)testVC.categoryView;
+            // 横线指示器
             JXCategoryIndicatorLineView *lineView = [[JXCategoryIndicatorLineView alloc] init];
             imageCategoryView.indicators = @[lineView];
             [self.navigationController pushViewController:testVC animated:YES];
