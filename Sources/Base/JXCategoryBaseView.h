@@ -109,11 +109,11 @@
  */
 - (void)reloadCellAtIndex:(NSInteger)index;
 
-#pragma mark - Subclass use
+#pragma mark - Subclass use 子类使用
 
 - (CGRect)getTargetCellFrame:(NSInteger)targetIndex;
 
-#pragma mark - Subclass Override
+#pragma mark - Subclass Override 子类覆写
 
 - (void)initializeData NS_REQUIRES_SUPER;
 
@@ -144,7 +144,6 @@
  */
 - (void)contentOffsetOfContentScrollViewDidChanged:(CGPoint)contentOffset NS_REQUIRES_SUPER;
 
-
 /**
  该方法用于子类重载，如果外部要选中某个index，请使用`- (void)selectItemAtIndex:(NSUInteger)index;`
  点击某一个item，或者contentScrollView滚动到某一个item的时候调用。根据selectIndex刷新选中状态。
@@ -161,7 +160,6 @@
  @return cellWidth
  */
 - (CGFloat)preferredCellWidthAtIndex:(NSInteger)index;
-
 
 /**
  返回自定义cell的class

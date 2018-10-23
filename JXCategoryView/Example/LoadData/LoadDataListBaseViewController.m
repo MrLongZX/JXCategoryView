@@ -23,7 +23,7 @@
 
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
 
-    //实际开发，建议使用MJRefresh
+    // 实际开发，建议使用MJRefresh
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"loading..." attributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
     [refreshControl addTarget:self action:@selector(headerRefresh) forControlEvents:UIControlEventValueChanged];
@@ -49,7 +49,7 @@
 }
 
 - (void)loadDataForFirst {
-    //第一次才加载，后续触发的不处理
+    // 第一次才加载，后续触发的不处理
     if (!self.isDataLoaded) {
         //为什么要手动设置contentoffset：https://stackoverflow.com/questions/14718850/uirefreshcontrol-beginrefreshing-not-working-when-uitableviewcontroller-is-ins
         [self.tableView setContentOffset:CGPointMake(0, -self.refreshControl.bounds.size.height) animated:YES];
